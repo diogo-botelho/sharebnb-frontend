@@ -9,11 +9,15 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:5000";
  */
 
 class SharebnbApi {
-  static async request(endpoint, data = {}, method = "get") {
+  static async request(endpoint, data = {}, method = "get", typeFile = false) {
     console.debug("API Call:", endpoint, data, method);
 
+    const content = typeFile ? "multipart/form-data" : "application/json";
     const url = `${BASE_URL}/${endpoint}`;
-    // const headers = { Authorization: `Bearer ${JoblyApi.token}` };
+    const headers = {
+      "Content-Type": content
+      // Authorization: `Bearer ${JoblyApi.token}` 
+    };
     const params = method === "get" ? data : {};
 
     try {
@@ -52,7 +56,8 @@ class SharebnbApi {
     const res = await this.request(
       "listings/add_image",
       { name, image, price, description, location },
-      "post"
+      "post",
+      true
     );
     return res;
   }
@@ -64,7 +69,11 @@ class SharebnbApi {
   static async updateListing({ listingId, image, price, description }) {
     const patchData = { image, price, description };
 
-    const res = await this.request(`listings/${listingId}`, patchData, "patch");
+    const res = await this.request(
+      `listings/${listingId}`,
+      patchData,
+      "patch",
+      true);
 
     return res.listing;
   }
