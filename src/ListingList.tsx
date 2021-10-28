@@ -14,47 +14,47 @@ import SharebnbApi from "./SharebnbApi";
  */
 
 function ListingList() {
-  const [listings, setListings] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
-  //   const [errors, setErrors] = useState([]);
+    const [listings, setListings] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState("");
+    //   const [errors, setErrors] = useState([]);
 
-  useEffect(
-    function fetchListingsOnLoad() {
-      async function getListingsFromApi() {
-        try {
-          const listings = await SharebnbApi.getListings();
-          setListings(listings);
-          setIsLoading(false);
-        } catch (err) {
-          console.error(err);
-          //   setErrors((previousErrors) => [...previousErrors, ...err]);
-        }
-      }
-      getListingsFromApi();
-    },
-    [isLoading]
-  );
+    useEffect(
+        function fetchListingsOnLoad() {
+            async function getListingsFromApi() {
+                try {
+                    const listings = await SharebnbApi.getListings();
+                    setListings(listings);
+                    setIsLoading(false);
+                } catch (err) {
+                    console.error(err);
+                    //   setErrors((previousErrors) => [...previousErrors, ...err]);
+                }
+            }
+            getListingsFromApi();
+        },
+        [isLoading]
+    );
 
-  function searchListings(formData) {
-    setSearchTerm(formData);
-    // setIsLoading(true);
-  }
+    function searchListings(formData) {
+        setSearchTerm(formData);
+        // setIsLoading(true);
+    }
 
-  //   if (errors.length > 0) {
-  //     return <Error errors={errors} />;
-  //   }
+    //   if (errors.length > 0) {
+    //     return <Error errors={errors} />;
+    //   }
 
-  if (isLoading) return <h1>Loading...</h1>;
+    if (isLoading) return <h1>Loading...</h1>;
 
-  return (
-    <div className="background-theme">
-      <SearchForm submitSearch={searchListings} initialData={searchTerm} />
-      {listings.map((listing) => (
-        <ListingCard key={listing.id} listing={listing} />
-      ))}
-    </div>
-  );
+    return (
+        <div className="background-theme">
+            <SearchForm submitSearch={searchListings} initialData={searchTerm} />
+            {listings.map((listing) => (
+                <ListingCard key={listing.id} listing={listing} />
+            ))}
+        </div>
+    );
 }
 
 export default ListingList;
