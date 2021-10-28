@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 // import { useContext } from "react";
-import "./NavBar.css";
+// import "./NavBar.css";
 
 /** Renders NavLinks
  *
