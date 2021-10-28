@@ -1,21 +1,25 @@
 import { NavLink } from "react-router-dom";
 // import { useContext } from "react";
 import "./NavBar.css";
-/**Renders NavLinks
- * 
+
+/** Renders NavLinks
+ *
  * Props: none
  * State: none
- * Context: none
- * 
+ *
  * App -> NavBar
-*/
-function NavBar() {
+ */
 
+function NavBar() {
   return (
     <nav className="NavBar navbar navbar-light bg-light">
       <div>
-        <NavLink className="NavBar-logo navbar-brand" exact to="/" >ShareBnB</NavLink>
-        <NavLink className="NavBar-link nav-link" exact to="/listings" >Listings</NavLink>
+        <NavLink className="NavBar-logo navbar-brand" exact to="/">
+          ShareBnB
+        </NavLink>
+        <NavLink className="NavBar-link nav-link" exact to="/listings">
+          Listings
+        </NavLink>
       </div>
     </nav>
   );

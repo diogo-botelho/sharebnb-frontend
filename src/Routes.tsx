@@ -1,23 +1,22 @@
-import { useContext } from 'react';
+// import { useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./HomePage";
-import ListingList from './ListingList'
-import ListingDetail from './ListingDetail'
-import AddListingForm from './AddListingForm'
+import ListingList from "./ListingList";
+import ListingDetail from "./ListingDetail";
+import AddListingForm from "./AddListingForm";
 
 /**Renders Routes
- * 
+ *
  * Props: none
  * State: none
- * Context: none
- * 
+ *
  * App -> Routes -> {
  *              HomePage,
  *              ListingList,
  *              ListingDetail,
  *              AddListingForm
  *          }
-*/
+ */
 
 function Routes() {
   // const user = useContext(CurrUserContext);
@@ -39,7 +38,7 @@ function Routes() {
       </Route>
       <Redirect to="/" />
     </Switch>
-  )
+  );
 }
 
 export default Routes;

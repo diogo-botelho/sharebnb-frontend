@@ -36,13 +36,13 @@ class SharebnbApi {
   }
 
   /** Get a specific listing
-   * 
+   *
    * Takes in handle
-   * 
+   *
    * Returns {listing}
    */
-  static async getListing(handle) {
-    const res = await this.request(`listings/${handle}`);
+  static async getListing(id) {
+    const res = await this.request(`listings/${id}`);
     return res.company;
   }
 
@@ -58,28 +58,23 @@ class SharebnbApi {
   }
 
   /** Function that updates a listing's information,
-  * takes an object { listingId, image, price, description }
-  * returns listing: { listingId, name, image, price, description, location }
-  */
+   * takes an object { listingId, image, price, description }
+   * returns listing: { listingId, name, image, price, description, location }
+   */
   static async updateListing({ listingId, image, price, description }) {
     const patchData = { image, price, description };
 
-    const res = await this.request(
-      `listings/${listingId}`,
-      patchData,
-      "patch");
+    const res = await this.request(`listings/${listingId}`, patchData, "patch");
 
     return res.listing;
   }
 
   /** Function that deletes a listing
-  * takes listingId
-  * returns "ListingId successfully deleted"
-  */
+   * takes listingId
+   * returns "ListingId successfully deleted"
+   */
   static async deleteListing(listingId) {
-    const res = await this.request(
-      `listings/${listingId}`,
-      "delete");
+    const res = await this.request(`listings/${listingId}`, "delete");
 
     return res.deleted;
   }
