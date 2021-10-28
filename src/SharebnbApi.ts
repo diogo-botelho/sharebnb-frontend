@@ -35,6 +35,17 @@ class SharebnbApi {
     return res.listings;
   }
 
+  /** Get a specific listing
+   * 
+   * Takes in handle
+   * 
+   * Returns {listing}
+   */
+  static async getListing(handle) {
+    const res = await this.request(`listings/${handle}`);
+    return res.company;
+  }
+
   /** Registers a new listing*/
   //TODO: Go back to backend, for check for returning in api
   static async createListing({ name, image, price, description, location }) {
@@ -44,6 +55,33 @@ class SharebnbApi {
       "post"
     );
     return res;
+  }
+
+  /** Function that updates a listing's information,
+  * takes an object { listingId, image, price, description }
+  * returns listing: { listingId, name, image, price, description, location }
+  */
+  static async updateListing({ listingId, image, price, description }) {
+    const patchData = { image, price, description };
+
+    const res = await this.request(
+      `listings/${listingId}`,
+      patchData,
+      "patch");
+
+    return res.listing;
+  }
+
+  /** Function that deletes a listing
+  * takes listingId
+  * returns "ListingId successfully deleted"
+  */
+  static async deleteListing(listingId) {
+    const res = await this.request(
+      `listings/${listingId}`,
+      "delete");
+
+    return res.deleted;
   }
 }
 
