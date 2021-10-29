@@ -35,10 +35,8 @@ function SearchForm({ submitSearch, initialData }) {
               onChange={handleChange}
             />
             <div className="col-auto">
-              {" "}
               <button type="submit" className="btn btn-lg btn-info">
-                {" "}
-                Search!!!{" "}
+                Search!!!
               </button>
             </div>
           </div>

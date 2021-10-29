@@ -11,18 +11,20 @@ import "./ListingCard.css";
 
 function ListingCard({ listing }) {
   return (
-    <Link className="ListingCard card" to={`listings/${listing.id}`}>
-      <div className="card-body">
-        <h2 className="card-title">{listing.name}</h2>
-        <p className="ListingCard-price">{listing.price.toLocaleString()}</p>
-        <p className="ListingCard-location">{listing.location}</p>
-        <div className="ListingCard-image-container">
-          {listing.image && (
-            <img className="float-end ms-5" src={listing.image} alt="logo" />
-          )}
+    <div className="ListingCard container">
+      <Link className="ListingCard card" to={`listings/${listing.id}`}>
+        <div className="card-body">
+          <h2 className="card-title">{listing.name}</h2>
+          <p className="card-text">{listing.price.toLocaleString()}</p>
+          <p className="card-text mb-2 ">{listing.location}</p>
+          <div className="ListingCard-image-container">
+            {listing.image && (
+              <img className="float-end ms-5" src={listing.image} alt="logo" />
+            )}
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 
