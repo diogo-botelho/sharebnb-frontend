@@ -1,5 +1,5 @@
 .ListingCard {
-  max-height: 250px;
+  max-height: 260px;
   margin-bottom: 1rem;
   color: inherit;
   text-decoration: none;
@@ -22,4 +22,15 @@
   display: flex;
   justify-content: center;
   margin-right: 44px;
+}
+
+.ListingCard-btn-container {
+  position: relative;
+}
+
+.ListingCard-btn {
+  width: 12%;
+  position: absolute;
+  right: 20px;
+  bottom: 5px;
 }

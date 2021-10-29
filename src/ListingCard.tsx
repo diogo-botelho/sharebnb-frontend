@@ -10,26 +10,38 @@ import "./ListingCard.css";
  */
 
 function ListingCard({ listing, deleteListing }) {
-
   async function handleDelete() {
     await deleteListing(listing.id);
   }
 
   return (
     <div className="ListingCard container">
-      <Link className="ListingCard card" to={`listings/${listing.id}`}>
+      <div className="ListingCard card">
         <div className="card-body">
-          <h2 className="card-title">{listing.name}</h2>
-          <p className="card-text">{listing.price.toLocaleString()}</p>
-          <p className="card-text mb-2 ">{listing.location}</p>
-          <div className="ListingCard-image-container">
-            {listing.image && (
-              <img className="float-end ms-5" src={listing.image} alt="logo" />
-            )}
+          <Link to={`listings/${listing.id}`}>
+            <h2 className="card-title">{listing.name}</h2>
+            <p className="card-text">{listing.price.toLocaleString()}</p>
+            <p className="card-text mb-2 ">{listing.location}</p>
+            <div className="ListingCard-image-container">
+              {listing.image && (
+                <img
+                  className="float-end ms-5"
+                  src={listing.image}
+                  alt="logo"
+                />
+              )}
+            </div>
+          </Link>
+          <div className="ListingCard-btn-container">
+            <button
+              className="ListingCard-btn btn btn-danger"
+              onClick={handleDelete}
+            >
+              Delete Listing
+            </button>
           </div>
         </div>
-      </Link>
-      <button onClick={handleDelete}>Delete Listing</button>
+      </div>
     </div>
   );
 }
