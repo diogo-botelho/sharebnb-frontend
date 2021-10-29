@@ -21,10 +21,10 @@ function ListingList() {
   //   const [errors, setErrors] = useState([]);
 
   useEffect(
-    function fetchListingsOnLoad() {
+    function fetchListings() {
       async function getListingsFromApi() {
         try {
-          const listings = await SharebnbApi.getListings();
+          const listings = await SharebnbApi.getListings(searchTerm);
           console.log(listings, "list");
           setListings(listings);
           setIsLoading(false);
@@ -35,12 +35,12 @@ function ListingList() {
       }
       getListingsFromApi();
     },
-    [isLoading]
+    [isLoading, searchTerm]
   );
 
   function searchListings(formData) {
     setSearchTerm(formData);
-    // setIsLoading(true);
+    setIsLoading(true);
   }
 
   //   if (errors.length > 0) {
@@ -52,13 +52,22 @@ function ListingList() {
     setIsLoading(true);
   }
 
+  async function deleteListing(id) {
+    await SharebnbApi.deleteListing(id);
+    setIsLoading(true);
+  }
+
   if (isLoading) return <Loading />;
 
   return (
     <div className="background-theme">
       <SearchForm submitSearch={searchListings} initialData={searchTerm} />
       {listings.map((listing) => (
-        <ListingCard key={listing.id} listing={listing} />
+        <ListingCard
+          key={listing.id}
+          listing={listing}
+          deleteListing={deleteListing}
+        />
       ))}
       <AddListingForm AddListing={addListing} />
     </div>

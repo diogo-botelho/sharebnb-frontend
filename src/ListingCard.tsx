@@ -9,7 +9,12 @@ import "./ListingCard.css";
  * ListingList --> ListingCard
  */
 
-function ListingCard({ listing }) {
+function ListingCard({ listing, deleteListing }) {
+
+  async function handleDelete() {
+    await deleteListing(listing.id);
+  }
+
   return (
     <div className="ListingCard container">
       <Link className="ListingCard card" to={`listings/${listing.id}`}>
@@ -24,6 +29,7 @@ function ListingCard({ listing }) {
           </div>
         </div>
       </Link>
+      <button onClick={handleDelete}>Delete Listing</button>
     </div>
   );
 }

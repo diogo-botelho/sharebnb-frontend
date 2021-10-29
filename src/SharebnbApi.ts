@@ -42,8 +42,10 @@ class SharebnbApi {
    *
    * returns [{listing}}, {listing}, {listing}]
    */
-  static async getListings() {
-    const res = await this.request("listings");
+  static async getListings(searchTerm = null) {
+    const searchParams = searchTerm ? { "name": searchTerm } : null;
+
+    const res = await this.request("listings", searchParams);
     return res.listings;
   }
 
@@ -97,7 +99,7 @@ class SharebnbApi {
    * returns "ListingId successfully deleted"
    */
   static async deleteListing(listingId) {
-    const res = await this.request(`listings/${listingId}`, "delete");
+    const res = await this.request(`listings/${listingId}`, {}, "delete");
 
     return res.deleted;
   }
