@@ -9,11 +9,11 @@ import Loading from "./Loading";
 /** Lists all the listings
  *
  * Props: none
- * State: listings, isLoading, searchTerm, errors
- * Context: none
+ * State: listings, isLoading, searchTerm
  *
  * Routes -> ListingList -> { SearchForm, AddListingForm, ListingCard }
  */
+
 function ListingList() {
   const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

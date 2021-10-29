@@ -3,7 +3,9 @@ import "./ListingCard.css";
 
 /** Renders an individual listing item
  *
- * Props: listing (obj of a listing: {name, descriptiong, location, img})
+ * Props: 
+ *     listing (obj of a listing: {name, description, location, img})
+ *     deleteListing fn
  * State: none
  *
  * ListingList --> ListingCard

@@ -12,10 +12,11 @@ const INITIAL_DATA = {
 /** Renders a Form for new listing
  *
  * Props: AddListing fn
- * State: formData, selectedFile
+ * State: formData
  *
  * ListingList -> AddListingForm
  */
+
 function AddListingForm({ AddListing }) {
   const [formData, setFormData] = useState(INITIAL_DATA);
 

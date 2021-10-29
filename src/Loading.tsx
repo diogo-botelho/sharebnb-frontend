@@ -1,5 +1,16 @@
 import { useState, useEffect } from "react";
 
+/** Renders Loading message
+ *
+ * Props:
+ *    text: str
+ *    speed: num
+ * State: none
+ *
+ * {ListingDetail, ListingList} --> Loading
+ *
+ */
+
 function Loading({ text = "Loading", speed = 300 }) {
   const [content, setContent] = useState(text);
 

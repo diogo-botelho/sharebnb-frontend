@@ -8,8 +8,8 @@ import Loading from "./Loading";
 /** Renders detail of one Listing
  *
  * Props: none
- * State: none
- *
+ * State: currentListing, isLoading
+ * 
  * Routes --> ListingDetail
  */
 
