@@ -14,13 +14,15 @@ function ListingCard({ listing, deleteListing }) {
     await deleteListing(listing.id);
   }
 
+  const price = +listing.price;
+
   return (
     <div className="ListingCard container">
       <div className="ListingCard card">
         <div className="card-body">
           <Link to={`listings/${listing.id}`}>
             <h2 className="card-title">{listing.name}</h2>
-            <p className="card-text">{listing.price.toLocaleString()}</p>
+            <p className="card-text">${price.toLocaleString()}</p>
             <p className="card-text mb-2 ">{listing.location}</p>
             <div className="ListingCard-image-container">
               {listing.image && (
