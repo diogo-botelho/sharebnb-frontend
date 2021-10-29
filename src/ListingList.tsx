@@ -8,7 +8,7 @@ import AddListingForm from "./AddListingForm";
 /** Lists all the listings
  *
  * Props: none
- * State: listings, isLoading, searchTerm, errrors
+ * State: listings, isLoading, searchTerm, errors
  * Context: none
  *
  * Routes -> ListingList -> { SearchForm, AddListingForm, ListingCard }
