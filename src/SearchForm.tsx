@@ -35,7 +35,10 @@ function SearchForm({ submitSearch, initialData }) {
               onChange={handleChange}
             />
             <div className="col-auto">
-              <button type="submit" className="btn btn-lg btn-info">
+              <button
+                type="submit"
+                className="SearchForm-btn btn btn-lg btn-info"
+              >
                 Search!!!
               </button>
             </div>

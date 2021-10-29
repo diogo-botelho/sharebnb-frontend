@@ -112,7 +112,10 @@ function AddListingForm({ AddListing }) {
               />
             </div>
             <div className="d-grid">
-              <button className="btn btn-info"> Add your listing </button>
+              <button className="AddListingForm-btn btn btn-info">
+                {" "}
+                Add your listing{" "}
+              </button>
             </div>
           </form>
         </div>
