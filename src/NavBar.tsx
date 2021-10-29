@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import "./NavBar.css";
 // import { useContext } from "react";
 // import "./NavBar.css";
 
@@ -12,14 +13,20 @@ import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
-    <nav className="NavBar navbar navbar-light bg-light">
-      <div>
-        <NavLink className="NavBar-logo navbar-brand" exact to="/">
-          ShareBnB
-        </NavLink>
-        <NavLink className="NavBar-link nav-link" exact to="/listings">
-          Listings
-        </NavLink>
+    <nav className="NavBar navbar navbar-expand-md">
+      <div className="container-fluid">
+        <ul className="navbar-nav ms-auto">
+          <li className="nav-item me-4">
+            <NavLink className="nav-link" exact to="/">
+              ShareBnB
+            </NavLink>
+          </li>
+          <li className="nav-item me-4">
+            <NavLink className="nav-link" exact to="/listings">
+              Listings
+            </NavLink>
+          </li>
+        </ul>
       </div>
     </nav>
   );

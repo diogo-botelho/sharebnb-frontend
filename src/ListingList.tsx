@@ -3,6 +3,7 @@ import SearchForm from "./SearchForm";
 import ListingCard from "./ListingCard";
 import SharebnbApi from "./SharebnbApi";
 import AddListingForm from "./AddListingForm";
+import Loading from "./Loading";
 // import Error from "./Error";
 
 /** Lists all the listings
@@ -14,54 +15,54 @@ import AddListingForm from "./AddListingForm";
  * Routes -> ListingList -> { SearchForm, AddListingForm, ListingCard }
  */
 function ListingList() {
-    const [listings, setListings] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [searchTerm, setSearchTerm] = useState("");
-    //   const [errors, setErrors] = useState([]);
+  const [listings, setListings] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  //   const [errors, setErrors] = useState([]);
 
-    useEffect(
-        function fetchListingsOnLoad() {
-            async function getListingsFromApi() {
-                try {
-                    const listings = await SharebnbApi.getListings();
-                    console.log(listings, "list");
-                    setListings(listings);
-                    setIsLoading(false);
-                } catch (err) {
-                    console.error(err);
-                    //   setErrors((previousErrors) => [...previousErrors, ...err]);
-                }
-            }
-            getListingsFromApi();
-        },
-        [isLoading]
-    );
+  useEffect(
+    function fetchListingsOnLoad() {
+      async function getListingsFromApi() {
+        try {
+          const listings = await SharebnbApi.getListings();
+          console.log(listings, "list");
+          setListings(listings);
+          setIsLoading(false);
+        } catch (err) {
+          console.error(err);
+          //   setErrors((previousErrors) => [...previousErrors, ...err]);
+        }
+      }
+      getListingsFromApi();
+    },
+    [isLoading]
+  );
 
-    function searchListings(formData) {
-        setSearchTerm(formData);
-        // setIsLoading(true);
-    }
+  function searchListings(formData) {
+    setSearchTerm(formData);
+    // setIsLoading(true);
+  }
 
-    //   if (errors.length > 0) {
-    //     return <Error errors={errors} />;
-    //   }
+  //   if (errors.length > 0) {
+  //     return <Error errors={errors} />;
+  //   }
 
-    async function addListing(formData) {
-        await SharebnbApi.createListing(formData);
-        setIsLoading(true);
-    }
+  async function addListing(formData) {
+    await SharebnbApi.createListing(formData);
+    setIsLoading(true);
+  }
 
-    if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading) return <Loading />;
 
-    return (
-        <div className="background-theme">
-            <AddListingForm AddListing={addListing} />
-            <SearchForm submitSearch={searchListings} initialData={searchTerm} />
-            {listings.map((listing) => (
-                <ListingCard key={listing.id} listing={listing} />
-            ))}
-        </div>
-    );
+  return (
+    <div className="background-theme">
+      <SearchForm submitSearch={searchListings} initialData={searchTerm} />
+      {listings.map((listing) => (
+        <ListingCard key={listing.id} listing={listing} />
+      ))}
+      <AddListingForm AddListing={addListing} />
+    </div>
+  );
 }
 
 export default ListingList;

@@ -1,3 +1,4 @@
+import "./HomePage.css";
 /** Renders HomePage
  *
  * Props: none
@@ -9,8 +10,10 @@
 function HomePage() {
   return (
     <div className="Homepage">
-      <h1>Welcome To ShareBnB!</h1>
-      <p>Check out a place to visit!</p>
+      <div className="container text-center">
+        <h1 className="mb-4 fw-bold">Welcome To ShareBnB!</h1>
+        <p className="lead">Check out a place to visit!</p>
+      </div>
     </div>
   );
 }

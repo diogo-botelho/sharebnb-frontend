@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SharebnbApi from "./SharebnbApi";
+import "./ListingDetail.css";
+import Loading from "./Loading";
 // import Error from "./Error";
 
 /** Renders detail of one Listing
- * 
+ *
  * Props: none
- * State: none 
- * 
+ * State: none
+ *
  * Routes --> ListingDetail
  */
 
@@ -36,14 +38,14 @@ function ListingDetail() {
   );
 
   //   if (errors.length < 1) return <Error errors={errors} />;
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
 
   return (
-    <div>
-      <h2>{currentListing.name}</h2>
-      <p>{currentListing.description}</p>
-      <p>{currentListing.price} </p>
-      <p>{currentListing.location}</p>
+    <div className="ListingDetail col-md-8 offset-md-2">
+      <h2 className="ListingDetail">{currentListing.name}</h2>
+      <p className="ListingDetail">{currentListing.description}</p>
+      <p className="ListingDetail">{currentListing.price} </p>
+      <p className="ListingDetail">{currentListing.location}</p>
       <div>
         <img src={currentListing.image} alt="listing_image" />
       </div>
