@@ -11,7 +11,7 @@ import AddListingForm from "./AddListingForm";
  * State: listings, isLoading, searchTerm, errrors
  * Context: none
  *
- * Routes -> ListingList -> { SearchForm, ListingCard }
+ * Routes -> ListingList -> { SearchForm, AddListingForm, ListingCard }
  */
 function ListingList() {
     const [listings, setListings] = useState([]);
