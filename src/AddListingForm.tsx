@@ -1,4 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+const INITIAL_DATA = {
+  name: "",
+  price: 0,
+  image: "",
+  description: "",
+  location: "",
+};
 
 /** Renders a Form for new listing
  *
@@ -7,33 +15,34 @@ import { useState } from "react";
  * 
  * ListingList -> AddListingForm
  */
-
-const INITIAL_DATA = {
-  name: "",
-  price: 0,
-  image: "", //React might shout for trying to change the type
-  description: "",
-  location: "",
-};
-
 function AddListingForm({ AddListing }) {
   const [formData, setFormData] = useState(INITIAL_DATA);
-  const [selectedFile, setSelectedFile] = useState();
 
+  /**Handles change for name, price, description, location */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((previousData) => ({ ...previousData, [name]: value }));
   }
 
+  /**Handles file upload.
+   * Sets formData state to include selected file  */
   function handleFile(evt) {
-    setSelectedFile(evt.target.files[0]);
-    setFormData((previousData) => ({ ...previousData, "image": selectedFile }));
+    const image = evt.target.files[0];
+    setFormData(previousData => ({ ...previousData, "image": image }));
   }
 
-  function handleSubmit(evt) {
+  /**Handles form submission. Builds instance of FormData class
+   * and calls addListing fn
+   */
+  async function handleSubmit(evt) {
+
     evt.preventDefault();
-    AddListing(formData);
-    setFormData(INITIAL_DATA);
+    const sendData = new FormData();
+
+    for (let key in formData) {
+      sendData.append(key, formData[key])
+    }
+    await AddListing(sendData);
   }
 
   return (
@@ -77,10 +86,8 @@ function AddListingForm({ AddListing }) {
       <input
         required
         type="file"
-        // enctype="multipart/form-data"
         name="image"
         id="image"
-        value={formData.image}
         placeholder="Image of your listing..."
         onChange={handleFile}
       ></input>

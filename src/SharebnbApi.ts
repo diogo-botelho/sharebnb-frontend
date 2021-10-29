@@ -17,20 +17,20 @@ const BASE_URL = "http://localhost:5000";
 // }
 
 class SharebnbApi {
-  static async request(endpoint, data = {}, method = "get", typeFile = false) {
+  static async request(endpoint, data = {}, method = "get") {
     console.debug("API Call:", endpoint, data, method);
 
-    const content = typeFile ? "multipart/form-data" : "application/json";
+    // const content = typeFile ? "multipart/form-data" : "application/json";
+    // const headers = {
+    //   "Content-Type": content,
+    //   // Authorization: `Bearer ${JoblyApi.token}`
+    // };
+
     const url = `${BASE_URL}/${endpoint}`;
-    const headers = {
-      "Content-Type": content,
-      // Authorization: `Bearer ${JoblyApi.token}`
-    };
     const params = method === "get" ? data : {};
-    // const axiosParams = { url, method, data, params, headers };
 
     try {
-      return (await axios({ url, method, data, params, headers } as any)).data;
+      return (await axios({ url, method, data, params } as any)).data;
     } catch (err) {
       console.error("API Error:", err.response);
       let message = err.response.data.error.message;
@@ -42,15 +42,9 @@ class SharebnbApi {
    *
    * returns [{listing}}, {listing}, {listing}]
    */
-
   static async getListings() {
-    console.log(`${BASE_URL}/listings`, "url response");
-    const res = await axios({ url: `${BASE_URL}/listings`, method: "GET" });
-
-    return res.data.listings;
-    // const res = await this.request("listings");
-    // console.log(res, "response from listings");
-    // return res.listings;
+    const res = await this.request("listings");
+    return res.listings;
   }
 
   /** Get a specific listing
@@ -61,19 +55,25 @@ class SharebnbApi {
    */
   static async getListing(id) {
     const res = await this.request(`listings/${id}`);
-    return res.company;
+    return res.listing;
   }
 
-  /** Registers a new listing*/
-  //TODO: Go back to backend, for check for returning in api
-  static async createListing({ name, image, price, description, location }) {
-    const res = await this.request(
-      "listings",
-      { name, image, price, description, location },
-      "post",
-      true
-    );
-    return res;
+  /** Registers a new listing
+   * 
+   * Takes in formData = { name, description, image, price, location } 
+   * 
+   * Returns listing = { name, description, image, price, location }
+  */
+  static async createListing(formData) {
+    const res = await this.request("listings", formData, "post");
+
+    // const res = await axios({
+    //   url: `${BASE_URL}/listings`,
+    //   method: "POST",
+    //   data: formData,
+    //   // headers: { "Content-Type": "multipart/form-data" }
+    // });
+    return res.listing;
   }
 
   /** Function that updates a listing's information,
@@ -86,8 +86,7 @@ class SharebnbApi {
     const res = await this.request(
       `listings/${listingId}`,
       patchData,
-      "patch",
-      true
+      "patch"
     );
 
     return res.listing;
